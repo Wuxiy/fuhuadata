@@ -186,6 +186,7 @@
             $('#save').addClass('hidden');
 
             $('.notnull').attr('disabled',true);
+            getBasic();
         }
 
     })
@@ -199,6 +200,7 @@
             var val = $(this).val();
             if(val == ''||val == null){
                 alert('请完善表单!');
+                isup = false;
                 return false;
             }
         });

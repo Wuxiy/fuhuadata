@@ -622,9 +622,9 @@ $(function () {
                 rules: {
                     orgName: 'required',
                     name: 'required',
-                    productionLicenses: 'required',
+                    /*productionLicenses: 'required',
                     pesticideRegistration: 'required',
-                    dischargePermit: 'required',
+                    dischargePermit: 'required',*/
                     supstate: 'required',
                     managerOrgName: 'required',
                     managerDepName: 'required',

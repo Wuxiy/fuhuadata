@@ -119,9 +119,9 @@ $(function () {
         verify:(function () {
             return $('#factory_info').validate({
                 rules: {
-                    transportationMethods: 'required',
-                    businessLicence: 'required',
-                    nvocc: 'required',
+                    transportationMethods: 'required'
+                    /*businessLicence: 'required',
+                    nvocc: 'required',*/
                 },
                 messages: {
                     transportationMethods: {
@@ -212,9 +212,10 @@ $(function () {
                     }
 
                 }else if (item.type==='checkbox') {
-
-                    $('[name="'+item.name+'"]', basicPanel.form)
-                        .val(data[field].split(','));
+                    if (!!data[field]) {
+                        $('[name="'+item.name+'"]', basicPanel.form)
+                            .val(data[field].split(','));
+                    }
                 }
                 /*else if (item.type==='select') {
 
@@ -284,10 +285,14 @@ $(function () {
         putCheckHandler:function () {
             var name = $(this).attr('name'),
                 val = $(this).val(),
-                arr = basicPanel.data[name].split(','),
-                hasVal = $(this).prop('checked');
+                hasVal = $(this).prop('checked'),
+                arr;
+            if (!basicPanel.data[name]) {
+                arr = [];
+            }else {
+                arr = basicPanel.data[name].split(',');
+            }
             // console.log(hasVal);
-
             if (hasVal) {
                 arr.push(val);
             }else {
