@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <table id="areaDimension" class="table table-bordered table-condensed table-striped text-center">
-                                <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                                <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                                 <thead>
 ##                                <tr>
 ##                                    <th class="text-center text-middle">编号</th>
@@ -63,7 +63,7 @@
                         <div id="customerRanking" class="tab-pane fade">
                             <!--客户排名开始-->
                             <table class="table table-bordered table-condensed text-center table-striped">
-                                <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                                <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                                 <thead>
                                 <tr>
                                     <th class="text-center text-middle">编号</th>
@@ -88,7 +88,7 @@
                         <div id="salesManRanking" class="tab-pane fade">
                             <!--业务员排名开始-->
                             <table class="table table-bordered table-condensed text-center table-striped">
-                                <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                                <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                                 <thead>
                                 <tr>
                                     <th class="text-center text-middle">编号</th>
@@ -112,7 +112,7 @@
                         <div id="productRanking" class="tab-pane fade">
                             <!--产品排名开始-->
                             <table class="table table-bordered table-condensed text-center table-striped">
-                                <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                                <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                                 <thead>
                                 <tr>
                                     <th class="text-center text-middle">编号</th>
@@ -153,7 +153,7 @@
             <div class="modal-body">
                 <!--表格-->
                 <table class="table table-condensed table-bordered text-center table-pagination">
-                    <caption class="text-right" lang="zh">单位：万元</caption>
+                    <caption class="text-right" lang="zh">单位：元</caption>
                     <thead></thead>
                     <tbody></tbody>
                 </table>

@@ -190,7 +190,7 @@
             }];
             areaTreeData.push.apply(areaTreeData,res.data);
 
-//            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
+            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
         });
 
         // 搜索按钮绑定事件
@@ -450,13 +450,25 @@
                     _html += '<tr>';
                     _html += '<td>'+(++count)+'</td>';
                     _html += '  <td><a href='+basePath+'"/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId='+ResultData[i].customerId+'">' + ResultData[i].customerName + '</a></td>';
-                    _html += '  <td>' + ResultData[i].startTime + '</td>';
-                    _html += '  <td>' + ResultData[i].endTime + '</td>';
+                    if (!!ResultData[i].startTime) {
+                        _html += '  <td>' + ResultData[i].startTime + '</td>';
+                    }else {
+                        _html += '<td></td>';
+                    }
+                    if (!!ResultData[i].endTime) {
+                        _html += '  <td>' + ResultData[i].endTime + '</td>';
+                    }else {
+                        _html += '<td></td>';
+                    }
                     _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';
                     _html += '  <td>' + ResultData[i].activityAddress + '</td>';
                     _html += '  <td><a data-toggle="modal" href="#myModal" data-visitrecordId="'+ResultData[i].visitrecordId+'"> ' + ResultData[i].activityExpense + '</a></td>';
 //                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
-                    _html += '  <td>' + ResultData[i].userName + '</td>';
+                    if (!!ResultData[i].userName) {
+                        _html += '  <td>' + ResultData[i].userName + '</td>';
+                    }else {
+                        _html += '<td></td>';
+                    }
                     _html += '   </tr>';
                 }
             }
