@@ -57,8 +57,9 @@
 ##                                </tr>
                                 </thead>
                                 <tbody></tbody>
-
                             </table>
+                            <!--分页导航-->
+                            <div id="paginationA" class="pagination"></div>
                         </div>
                         <div id="customerRanking" class="tab-pane fade">
                             <!--客户排名开始-->
@@ -202,7 +203,7 @@
 //            serach();
 //        });
         //默认查询数据
-        serach(0);
+        serach(0, $('#paginationA'));
     })
 
     //查询按钮提交数据
@@ -229,9 +230,10 @@
             serach(4,$('#paginationP'));
         }else if(el.attr('href')==='#areaRanking'){
             $('#dimensionP').val(0);
-            serach(0);
+            serach(0,$('#paginationA'));
         }else if(el.attr('href')==='#countryRanking'){
-            serach(1);
+            $('#dimensionP').val(1);
+            serach(1, $('#paginationA'));
         }else if(el.attr('href')==='#customerRanking'){
             $('#dimensionP').val(2);
             serach(2,$('#paginationC'));
@@ -284,7 +286,13 @@
      //地区分类change事件
     $('#dimension').on('change',function (e) {
         var val = $('#dimension').find('option').filter(':selected').val();
-        serach(val);
+        if (val==='1') {
+            $('#dimensionP').val(1);
+            serach(val, $('#paginationA'));
+        }else if (val==='0') {
+            $('#dimensionP').val(0);
+            serach(val, $('#paginationA'));
+        }
     });
 
     //点击搜索
