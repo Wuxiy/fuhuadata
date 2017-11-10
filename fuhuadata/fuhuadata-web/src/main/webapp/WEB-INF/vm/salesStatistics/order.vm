@@ -90,7 +90,7 @@
                         </div>
                         <!--表格-->
                         <table class="table table-condensed table-bordered table-striped text-center">
-                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                            <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                             <thead>
                             <tr>
                                 <th class="text-center" lang="zh">编号</th>

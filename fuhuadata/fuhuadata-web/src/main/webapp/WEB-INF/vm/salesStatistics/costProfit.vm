@@ -64,7 +64,7 @@
                     </div>
                     <!--表格-->
                     <table class="table table-condensed table-bordered table-striped text-center">
-                        <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                        <caption class="text-right"><span lang="zh">金额单位：元</span></caption>
                         <thead>
                         <tr>
                             <th class="text-center" lang="zh">编号</th>
@@ -122,7 +122,7 @@
             <div class="modal-body">
                 <!--表格-->
                 <table class="table table-condensed table-bordered text-center table-pagination">
-                    <caption class="text-right" lang="zh">单位：万元</caption>
+                    <caption class="text-right" lang="zh">单位：元</caption>
                     <thead>
                     <tr>
                         <th class="text-center">产品名称</th>
