@@ -839,7 +839,7 @@
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit,
+            SUM(sc.gross_profit)-IFNULL(SUM(a.maintenance_fee),0) netProfit,
             SUM(cs.nclaimmny) actualAmountPaid
             FROM
             customer_base_info base
@@ -860,7 +860,7 @@
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit,
+            SUM(sc.gross_profit)-IFNULL(SUM(a.maintenance_fee),0) netProfit,
             SUM(cs.nclaimmny) actualAmountPaid
             FROM
             business_order a
@@ -888,7 +888,7 @@
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit,
+            SUM(sc.gross_profit)-IFNULL(SUM(a.maintenance_fee),0) netProfit,
             SUM(cs.nclaimmny) actualAmountPaid,
             a.sales_man_id salesManId,
             a.sales_man_name salesManName
@@ -915,9 +915,9 @@
             base.full_name customerName,
             ua.userArea,
             SUM(sc.amount) salesAmount,
-            SUM(sc.gross_profit) grossProfit,
-            SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit,
+            SUM(sc.gross_profit) as grossProfit,
+            SUM(a.maintenance_fee) as maintenanceFee,
+            SUM(sc.gross_profit)-IFNULL(SUM(a.maintenance_fee),0) as netProfit,
             SUM(cs.nclaimmny) actualAmountPaid,
             a.sales_man_id salesManId,
             a.sales_man_name salesManName
