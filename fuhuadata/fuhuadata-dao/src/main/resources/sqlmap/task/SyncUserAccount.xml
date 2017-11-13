@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SyncUserAccount" >
+  <typeAlias alias="SyncUserAccount" type="com.fuhuadata.domain.mybatis.UserAccount"/>
+
+  <select id="getUserAccount" resultClass="SyncUserAccount">
+    select
+      p.code as loginName,
+      '123456' as loginPassword,
+      p.name,
+      p.mobile,
+      p.code,
+      p.pk_group AS pkGroup,
+      p.pk_org AS pkOrg,
+      p.pk_psndoc AS pkPsndoc
+    from  sm_user u,bd_psndoc p
+    where u.pk_psndoc = p.pk_psndoc
+  </select>
+  <insert id="insertUserAccount" parameterClass="java.util.List">
+        INSERT INTO p_user_account (login_name,login_password,name,mobile,code,pk_group,pk_org,pk_psndoc) VALUES
+      <iterate conjunction=",">
+        (#list[].loginName#,#list[].loginPassword#,#list[].name#,#list[].mobile#,#list[].code#,#list[].pkGroup#,#list[].pkOrg#,#list[].pkPsndoc#)
+      </iterate>
+      ON DUPLICATE KEY UPDATE name=VALUES(name),mobile=VALUES(mobile),pk_org=VALUES(pk_org),pk_psndoc=VALUES(pk_psndoc)
+  </insert>
+
+
+</sqlMap>
