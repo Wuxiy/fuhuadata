@@ -18,6 +18,8 @@
         <task:scheduled ref="syncProduct" method="sync"  cron="0 30 0 * * ?"/>
         <task:scheduled ref="syncFreightForwarding" method="sync" cron="0 30 0 * * ?"/>
         <task:scheduled ref="syncUserAccount" method="sync" cron="0 30 0 * * ?"/>
+        <!--采购合同，原药合同-->
+        <task:scheduled ref="syncBusinessContractService" method="sync" cron="0 30 0 * * ?"/>
     </task:scheduled-tasks>
 
 

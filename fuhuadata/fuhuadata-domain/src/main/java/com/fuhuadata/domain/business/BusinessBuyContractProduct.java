@@ -17,7 +17,11 @@ public class BusinessBuyContractProduct extends BaseEntity<Integer> {
      */
     @Column(name = "pk_buy_contract")
     private String pkBuyContract;
-
+    /**
+     * 采购合同nc表体主键
+     */
+    @Column(name="pk_buy_contract_product")
+    private String pkBuyContractProduct;
     /**
      * 物料编码
      */
@@ -111,7 +115,13 @@ public class BusinessBuyContractProduct extends BaseEntity<Integer> {
     public void setPkBuyContract(String pkBuyContract) {
         this.pkBuyContract = pkBuyContract == null ? null : pkBuyContract.trim();
     }
+    public String getPkBuyContractProduct() {
+        return pkBuyContractProduct;
+    }
 
+    public void setPkBuyContractProduct(String pkBuyContractProduct) {
+        this.pkBuyContractProduct = pkBuyContractProduct;
+    }
     /**
      * 获取物料编码
      *

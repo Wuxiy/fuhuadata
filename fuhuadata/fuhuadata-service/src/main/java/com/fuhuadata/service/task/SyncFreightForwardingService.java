@@ -1,6 +1,6 @@
 package com.fuhuadata.service.task;
 
-import com.fuhuadata.dao.task.SyncFreightForwardingDao;
+import com.fuhuadata.dao.task.SyncBaseInfoDao;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.domain.mybatis.CustomerBaseInfo;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class SyncFreightForwardingService {
     private Logger logger= LoggerFactory.getLogger(SyncFreightForwardingService.class);
     @Autowired
-    private SyncFreightForwardingDao syncFreightForwardingDao;
+    private SyncBaseInfoDao syncFreightForwardingDao;
     @Autowired
     private FreightForwardingService freightForwardingService;
     @Autowired

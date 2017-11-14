@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
-<sqlMap namespace="SyncFreightForwarding" >
+<sqlMap namespace="SyncBaseInfo" >
   <typeAlias alias="freightForwarding" type="com.fuhuadata.domain.mybatis.supplier.FreightForwarding"/>
     <typeAlias alias="linkMan" type="com.fuhuadata.domain.mybatis.supplier.SupplierLinkman"/>
     <typeAlias alias="bankAccBas" type="com.fuhuadata.domain.common.BankAccBas"/>
     <typeAlias alias="warehouse" type="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo"/>
     <typeAlias alias="customer" type="com.fuhuadata.domain.mybatis.CustomerBaseInfo"/>
+    <typeAlias alias="buyContract" type="com.fuhuadata.domain.business.BusinessBuyContract"/>
+    <typeAlias alias="buyContractProduct" type="com.fuhuadata.domain.business.BusinessBuyContractProduct"/>
+    <typeAlias alias="OrgiContract" type="com.fuhuadata.domain.business.BusinessOrgiContract"/>
   <select id="getOracleData" resultClass="freightforwarding">
       SELECT
               s.code as code,
@@ -130,5 +133,61 @@
                 left join  sm_user u on  u.cuserid = c.modifier
                  where
                    c.pk_custclass  in('1001D210000000005TE6','1001D210000000005TE7','1001D210000000005TE5')
+    </select>
+
+    <select id="getBusinessBuyContract" resultClass="buyContract">
+        select
+          cp.pk_ct_pu AS pkCtPu,
+          cp.ctname as ctname,
+          cp.vbillcode,
+          cp.ntotalastnum as totalNumber,
+          cp.ntotaltaxmny as ntotalorigmny,
+          cp.subscribedate,
+          cp.invallidate,
+          cp.actualvalidate,
+          cp.actualinvalidate,
+          cp.cvendorid
+        from ct_pu cp where cvendorid in
+          (select pk_supplier from bd_supplier where pk_supplierclass
+              in(select pk_supplierclass from bd_supplierclass where code in('2504','2503','2502','2501','25'))) and ts>'2017-11-01'
+    </select>
+    <select id="getBuyContractProduct" resultClass="buyContractProduct">
+        select
+          cb.pk_ct_pu_b as pkBuyContractProduct,
+          cb.pk_ct_pu as pkBuyContract,
+          cb.pk_material as pkMaterial,
+          bm.name as cunit,
+          cb.nnum,
+          cb.norigprice as price,
+          cb.norigmny as totalPrice,
+          nvl(enc.pk_contract,ec.pk_contract) as exportCtPk,
+          nvl(enc.vbillcode,ec.vbillcode) as exportCtCode,
+          nvl(bnc.name,bc.name) as exportCtClientName
+        from ct_pu_b cb
+         left join ct_pu c on c.pk_ct_pu=cb.pk_ct_pu
+         left join bd_measdoc bm on bm.pk_measdoc=cb.cunitid
+         left join ent_contract enc on enc.pk_contract=cb.vbdef19
+         left join bd_customer bnc on bnc.pk_customer=enc.ccustomerid
+         left join et_contract ec on ec.pk_contract=cb.vbdef19
+         left join bd_customer bc on bc.pk_customer=ec.ccustomerid
+        where c.cvendorid in (select pk_supplier from bd_supplier where pk_supplierclass
+          in(select pk_supplierclass from bd_supplierclass where code in('2504','2503','2502','2501','25'))) and c.ts>'2017-11-01'
+    </select>
+    <select id="getOrgiContract" resultClass="OrgiContract">
+        select
+          cp.pk_ct_sale AS pkCtSale,
+          cp.vbillcode as contractCode,
+          cp.ntotalastnum as mainNum,
+          cp.ntotalorigmny as totalPrice,
+          cp.actualinvalidate as actualvalidate,
+          cp.actualvalidate as actualinvalidate,
+          bs.pk_supplier
+        from ct_sale cp
+          left join bd_customer bc on bc.pk_customer=cp.pk_customer
+          left join bd_supplier bs on bs.name=bc.name
+        where cp.pk_customer in
+            (select pk_customer from bd_customer where name
+              in(select name from bd_supplier where pk_supplierclass
+              in(select pk_supplierclass from bd_supplierclass where code in('25','2501','2502','2503','204')))) and cp.ts>'2017-10-01'
     </select>
 </sqlMap>
