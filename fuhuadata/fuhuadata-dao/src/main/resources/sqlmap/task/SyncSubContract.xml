@@ -11,7 +11,7 @@
               c.norigmny as amount,
               c.nnum as num,
               c.vbdef36 as grossProfit,
-              c.vbdef30 as grossRate,
+              decode(c.vbdef30,'~',0,c.vbdef30) as grossRate,
               1 as type
         from
               et_contract_b c,
@@ -34,7 +34,7 @@
               nc.norigmny as amount,
               nc.nnum as num,
               nc.vbdef36 as grossProfit,
-              nc.vbdef30 as grossRate,
+              Decode(nc.vbdef30,'~',0,nc.vbdef30) as grossRate,
               2 as type
         from
               ent_contract_b nc,
@@ -56,15 +56,12 @@
   </delete>
 
   <insert id="insertMysqlData" parameterClass="java.util.List">
-    <![CDATA[
             INSERT INTO sync_sub_contract
             (type,product_code,pk_contract_b,pk_contract,amount,num,gross_profit,gross_rate) values
-            ]]>
     <iterate conjunction=",">
-      <![CDATA[
                 (#[].type#,#[].productCode#,#[].pkContractB#,#[].pkContract#,#[].amount#,#[].num#,#[].grossProfit#,#[].grossRate#)
-                ]]>
     </iterate>
+      ON DUPLICATE KEY UPDATE product_code=VALUES(product_code)
   </insert>
 
 

@@ -57,6 +57,7 @@
                 (#[].type#,#[].pkLongpro#,#[].pkContract#,#[].amount#,#[].grossProfit#)
                 ]]>
     </iterate>
+      ON DUPLICATE KEY UPDATE type=VALUES(type)
   </insert>
 
 
