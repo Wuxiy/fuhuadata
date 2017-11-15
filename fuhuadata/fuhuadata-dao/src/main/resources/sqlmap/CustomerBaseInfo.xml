@@ -677,7 +677,7 @@
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order
 		where customer_id = #customerId#
-		and status = 3
+		and status = 2
 	</select>
 
 	<select id="countOrderProduct" resultClass="CountCustomersOrderProduct" parameterClass="java.lang.String">
