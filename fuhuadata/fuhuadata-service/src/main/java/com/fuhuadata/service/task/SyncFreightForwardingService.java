@@ -8,10 +8,8 @@ import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
-import com.fuhuadata.service.mybatis.BaseService;
 import com.fuhuadata.service.mybatis.CustomerBaseInfoService;
 import com.fuhuadata.service.mybatis.common.BankAccBasService;
-import com.fuhuadata.service.mybatis.common.BankAccBasServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
 import com.fuhuadata.service.mybatis.supplier.SupplierLinkmanService;
 import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
@@ -60,7 +58,7 @@ public class SyncFreightForwardingService {
                 freightForwardingService.saveOrUpdateSelective(freightForwarding);
             }
             syncCustomerDoc();
-            //syncBankacc();
+            syncBankacc();
             //syncLinkMan();
             syncStorDoc();
         }catch (Exception e){
@@ -133,6 +131,7 @@ public class SyncFreightForwardingService {
             logger.warn("同步货代仓库出错");
         }
     }
+
     private void syncCustomerDoc(){
         try{
             List<CustomerBaseInfo> list=syncFreightForwardingDao.getCustomerBaseInfo();
@@ -152,5 +151,8 @@ public class SyncFreightForwardingService {
             e.printStackTrace();
             logger.warn("同步customer信息出错");
         }
+    }
+    private void syncFactory(){
+
     }
 }

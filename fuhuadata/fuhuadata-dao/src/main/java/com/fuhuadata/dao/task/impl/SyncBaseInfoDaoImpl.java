@@ -60,5 +60,4 @@ public class SyncBaseInfoDaoImpl implements SyncBaseInfoDao {
         return sqlMapClientOracle.queryForList("SyncBaseInfo.getOrgiContract");
     }
 
-
 }

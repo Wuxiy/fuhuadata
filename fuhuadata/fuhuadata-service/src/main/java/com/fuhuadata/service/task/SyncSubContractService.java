@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 同步NC合同部分字段到mysql
- * Created by hexingfu on 2017/4/19.
+ * Created by zhangxiang on 2017/4/19.
  */
 @Service("syncSubContract")
 public class SyncSubContractService {
