@@ -5,9 +5,8 @@ import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.manager.NCExchange.FactoryInfoToNC;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.cxf.BusException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,7 +26,7 @@ import java.util.Map;
  */
 public class FactoryInfoToNCImpl implements FactoryInfoToNC {
 
-    private static final Log log = LogFactory.getLog(FactoryInfoToNCImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(FactoryInfoToNCImpl.class);
 
     @Autowired
     ServletContext servletContext;
@@ -67,7 +66,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 log.error("导入nc失败");
                 throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
-                log.info("导入nc成功");
+                log.debug("导入nc成功");
                 //将nc回传的pk_factory写入crm中
                 Map<Integer,Object> mapc=new HashMap<Integer, Object>();
                 mapc.put(factoryInfo.getId(),pk_factory);
@@ -123,7 +122,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 log.error("导入nc失败");
                 throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
-                log.info("导入nc成功");
+                log.debug("导入nc成功");
                 //将nc回传的pk_bankaccbas写入crm中
 
                 mapc.put("pk_bankaccbas",pk_bankaccbas);

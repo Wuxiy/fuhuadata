@@ -3,8 +3,8 @@ package com.fuhuadata.manager.impl.NCExchange;
 import com.fuhuadata.dao.NCExchange.FactoryToNc;
 import com.fuhuadata.domain.supplier.ProduceFactoryProduct;
 import com.fuhuadata.manager.NCExchange.FactoryProductToNC;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class FactoryProductToNCImpl implements FactoryProductToNC {
 
-    private static final Log log = LogFactory.getLog(FactoryProductToNCImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(FactoryProductToNCImpl.class);
 
     @Autowired
     ServletContext servletContext;
@@ -58,7 +58,7 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
                 log.error("导入nc失败");
                 throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
-                log.info("导入nc成功");
+                log.debug("导入nc成功");
                 //将nc回传的pk_supplierext写入crm
                 pkMap.put(factoryProducts.get(0).getId(),pk_supplierext);
             }else {

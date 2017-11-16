@@ -4,9 +4,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
-
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -17,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 
 /**
  * 生成xml文件并发送nc的工具类
