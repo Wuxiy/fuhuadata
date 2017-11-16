@@ -16,6 +16,8 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
@@ -48,7 +50,7 @@ import java.util.Map;
  */
 public class BusinessOrderToNCImpl implements BusinessOrderToNC{
 
-    private static final Log log = LogFactory.getLog(BusinessOrderToNCImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(BusinessOrderToNCImpl.class);
     @Autowired
     private BusinessOrderDao businessOrderDao;
     @Autowired
@@ -91,6 +93,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             //判断该客户是否是合作客户，如果不是则转换成合作客户，并导入nc客户基本档案
             if (2==customerType){
                 ncid=customerInfoToNC.sendCustomerInfo(customerBaseInfo);
+                log.debug("新增合作客户并导入nc成功");
             }
             String xmlName=null;
             List<BusinessOrderProduct> orderProducts=null;
@@ -200,6 +203,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     orderBaseInfo.setStatus(2);
                     orderBaseInfo.setNcOrderId(pk_order);
                     businessOrderDao.updateBusinessOrderByOrderId(orderBaseInfo);
+                    log.debug("更新订单状态为2成功");
                     //生成pdf附件
                     pPath=pk_order;
                     String pdfPath= pDFTempletToPDF.PDFTempletToPDFmanager(orderProducts);

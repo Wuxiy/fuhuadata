@@ -317,6 +317,7 @@
             jQuery.ajax({
                 url:basePath + '/marketTraining/doAddMarketTraining',
                 data:adddata(),
+                contentType:'application/json',
                 type:'POST',
                 success:function(result){
                     if(result.code == 1){
