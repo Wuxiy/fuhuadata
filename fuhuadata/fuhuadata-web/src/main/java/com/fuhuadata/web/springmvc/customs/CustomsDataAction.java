@@ -8,6 +8,7 @@ import com.fuhuadata.domain.validation.groups.GroupOne;
 import com.fuhuadata.service.mybatis.customs.CustomsDataService;
 import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -40,28 +41,33 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
     @Resource
     private CustomsDataService customsDataService;
 
+    @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
         return "industryData/countryPie";
     }
 
+    @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/pie/company/vm", method = RequestMethod.GET)
     public String companyPie() {
         return "industryData/companyPie";
     }
 
+    @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/bar/countries/vm", method = RequestMethod.GET)
     public String countryBar() {
         return "industryData/countryTendency";
     }
 
     // 出口企业趋势图
+    @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/bar/companies/vm", method = RequestMethod.GET)
     public String companyBar() {
         return "industryData/companyTendency";
     }
 
     // 出口国家同比图
+    @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/compare/companies/vm", method = RequestMethod.GET)
     public String countryCompare() {
         return "industryData/countryCompared";
