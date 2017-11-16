@@ -687,15 +687,15 @@
 			sum(op.`min_price`*op.`main_product_amount`) totalMinPrice,
 			sum(op.`main_product_amount`)  totalSaleNum,
 			sum(op.`main_product_amount`)  totalSaleNum,
-			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney
+			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney,
 			p.measurement
 		from  business_order o,business_order_product op,product_info p
 			where
 			o.`order_id` = op.`order_id`
 			and op.`product_id` = p.`product_id`
 			and transform_state=1
-			and o.status = 3
-			o.`customer_id` = #customerId#
+			and o.status = 2
+			and o.`customer_id` = #customerId#
 		group by op.archive_product_id
 	</select>
 
