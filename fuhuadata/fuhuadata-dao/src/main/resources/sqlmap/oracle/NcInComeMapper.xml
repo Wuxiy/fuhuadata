@@ -27,4 +27,7 @@
     <result column="TS" jdbcType="CHAR" property="ts" />
     <result column="FHZQDAYS" jdbcType="VARCHAR" property="fhzqdays" />
   </resultMap>
+  <select id="getAllInCome" resultMap="BaseResultMap">
+    select * FROM bd_income WHERE code LIKE 'W%'
+  </select>
 </mapper>
