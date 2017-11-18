@@ -9,6 +9,7 @@ import com.fuhuadata.domain.echarts.PieData;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 public interface CustomsDataMapper extends BaseMapper<CustomsData, Long> {
@@ -68,4 +69,6 @@ public interface CustomsDataMapper extends BaseMapper<CustomsData, Long> {
      * @return
      */
     List<BarData> listCountryCompareData(CompareQuery query);
+
+    HashMap getDateRange();
 }

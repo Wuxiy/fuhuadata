@@ -296,6 +296,11 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         return barResult;
     }
 
+    @Override
+    public HashMap getDateRange() {
+        return getCustomsDataMapper().getDateRange() ;
+    }
+
     private BarResult getBarResult(CustomsDataQuery query, List<BarData> barData, List<String> countryNames, Map<Integer, String> idMapName) {
         String timeType = query.getTimeType();
         LocalDate startDate = query.getStartDate();

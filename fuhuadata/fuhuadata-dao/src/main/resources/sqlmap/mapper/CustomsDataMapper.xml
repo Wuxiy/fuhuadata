@@ -374,5 +374,8 @@
             , month_flag
         </if>
     </select>
+    <select id="getDateRange" resultType="java.util.HashMap">
+        SELECT MAX(cdate) as maxDate,MIN(cdate) as minDate FROM `customs_data`
+    </select>
 
 </mapper>

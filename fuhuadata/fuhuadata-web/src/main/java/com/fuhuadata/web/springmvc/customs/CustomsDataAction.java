@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
@@ -43,8 +46,11 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index() {
-        return "industryData/countryPie";
+    public ModelAndView index() {
+            HashMap<String,Date> dateRange =customsDataService.getDateRange();
+        return new ModelAndView("industryData/countryPie")
+                .addObject("maxDate",dateRange.get("maxDate"))
+                .addObject("minDate",dateRange.get("minDate"));
     }
 
     @RequiresPermissions({"industry:market:view"})

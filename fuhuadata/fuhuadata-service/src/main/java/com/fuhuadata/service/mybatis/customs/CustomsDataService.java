@@ -9,6 +9,7 @@ import com.fuhuadata.service.mybatis.BaseService;
 
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,4 +65,5 @@ public interface CustomsDataService extends BaseService<CustomsData, Long> {
      * @return
      */
     BarResult getCountryCompareData(CompareQuery query);
+    HashMap getDateRange();
 }
