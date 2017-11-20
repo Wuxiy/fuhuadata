@@ -55,28 +55,44 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/pie/company/vm", method = RequestMethod.GET)
-    public String companyPie() {
-        return "industryData/companyPie";
+    public ModelAndView companyPie() {
+        //返回海关数据时间范围
+        HashMap<String,Date> dateRange =customsDataService.getDateRange();
+        return new ModelAndView("industryData/companyPie")
+                .addObject("maxDate",dateRange.get("maxDate"))
+                .addObject("minDate",dateRange.get("minDate"));
     }
 
     @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/bar/countries/vm", method = RequestMethod.GET)
-    public String countryBar() {
-        return "industryData/countryTendency";
+    public ModelAndView countryBar() {
+        //返回海关数据时间范围
+        HashMap<String,Date> dateRange =customsDataService.getDateRange();
+        return new ModelAndView("industryData/countryTendency")
+                .addObject("maxDate",dateRange.get("maxDate"))
+                .addObject("minDate",dateRange.get("minDate"));
     }
 
     // 出口企业趋势图
     @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/bar/companies/vm", method = RequestMethod.GET)
-    public String companyBar() {
-        return "industryData/companyTendency";
+    public ModelAndView companyBar() {
+        //返回海关数据时间范围
+        HashMap<String,Date> dateRange =customsDataService.getDateRange();
+        return new ModelAndView("industryData/companyTendency")
+                .addObject("maxDate",dateRange.get("maxDate"))
+                .addObject("minDate",dateRange.get("minDate"));
     }
 
     // 出口国家同比图
     @RequiresPermissions({"industry:market:view"})
     @RequestMapping(value = "/compare/companies/vm", method = RequestMethod.GET)
-    public String countryCompare() {
-        return "industryData/countryCompared";
+    public ModelAndView countryCompare() {
+        //返回海关数据时间范围
+        HashMap<String,Date> dateRange =customsDataService.getDateRange();
+        return new ModelAndView("industryData/countryCompared")
+                .addObject("maxDate",dateRange.get("maxDate"))
+                .addObject("minDate",dateRange.get("minDate"));
     }
 
     @RequestMapping(value = "excel", method = RequestMethod.POST)
