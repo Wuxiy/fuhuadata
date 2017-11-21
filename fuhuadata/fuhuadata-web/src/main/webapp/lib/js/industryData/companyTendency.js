@@ -7,7 +7,9 @@
     var form = {
             child:[
                 $('[name="timeType"]','#search_data'),
-                $('[name="daterange"]','#search_data'),
+                // $('[name="daterange"]','#search_data'),
+                $('[name="startDate"]','#search_data'),
+                $('[name="endDate"]','#search_data'),
                 $('[name="countries"]','#search_data'),
                 $('[name="statType"]','#search_data'),
                 $('[name="categoryType"]','#search_data'),
@@ -16,28 +18,39 @@
             data:{},
             getData:function () {
                 var self = this,
-                    arr = self.child[1].val().split(' - '),
+                    startDate = self.child[1],
+                    endDate = self.child[2],
+                    startY = startDate.find('[name="year"]').val(),
+                    startM = startDate.find('[name="month"]').val().length===1?'0'+startDate.find('[name="month"]').val():startDate.find('[name="month"]').val(),
+                    endY = endDate.find('[name="year"]').val(),
+                    endM = endDate.find('[name="month"]').val().length===1?'0'+endDate.find('[name="month"]').val():endDate.find('[name="month"]').val(),
                     data = {
                         timeType:self.child[0].val(),
-                        startDate:arr[0],
-                        endDate:arr[1],
-                        statIds:self.child[2].selectpicker('val'),
-                        statType:self.child[3].val(),
-                        categoryType:self.child[4].val(),
-                        categoryId:self.child[5].val()
+                        startDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?startY+'-'+startM+'-01':endY+'-'+endM+'-01',
+                        endDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?formatEndDate(endY, endM):formatEndDate(startY, startM),
+                        statIds:self.child[3].selectpicker('val'),
+                        statType:self.child[4].val(),
+                        categoryType:self.child[5].val(),
+                        categoryId:self.child[6].val()
                     };
+
 
                 if (Array.isArray(data.statIds)) data.statIds=data.statIds.join(',');
 
-                if (data.startDate.length<5) {
 
-                    data.startDate = data.startDate + '-01-01';
-                    data.endDate = data.endDate + '-01-01';
-                }else {
-
-                    data.startDate = data.startDate + '-01';
-                    data.endDate = data.endDate + '-01';
+                // 如果日期类型是按年份，且开始日期大于结束日期的年份，则交换两个字段的年份
+                if (data.timeType==='year' && parseInt(startY)>parseInt(endY)) {
+                    var startCopy = data.startDate;
+                    data.startDate = endY + data.endDate.slice(4,7) + '-01';
+                    data.endDate = startY + startCopy.slice(4,7) + '-31';
+                    startDate.find('[name="month"]').val(12);
+                    endDate.find('[name="month"]').val(1);
+                }else if(data.timeType==='year' && parseInt(startY)<parseInt(endY)){
+                    startDate.find('[name="month"]').val(1);
+                    endDate.find('[name="month"]').val(12);
                 }
+
+
                 self.data = data;
             }
         },
@@ -103,7 +116,7 @@
         },
         otherInput = {
             parent:'#search_data',
-            target:'[name="statType"]',
+            target:'[name="statType"],[name="year"],[name="month"]',
             init:function () {
                 this.addEvent();
             },
@@ -495,65 +508,45 @@
             }
         },
         calendar={
-            parent:'#search_data',
-            target:'[name="daterange"]',
-            icon:'.icon-calendar',
-            params:function (timeType) {
-                var o,
-                    newDate = new Date(),
-                    year = newDate.getFullYear(),
-                    month = newDate.getMonth()+1,
-                    calculateStart = {
-                        year:function () {
-                            var _year = year-2;
-                            return _year+'';
-                        },
-                        month:function () {
-                            var _month,_year;
+            init:function (timeType) {
+                var startDate = $('[name="startDate"]','#search_data'),
+                    endDate = $('[name="endDate"]','#search_data'),
+                    monthLabel = $('[name="month-label"]', '#search_data'),
+                    startY = startDate.find('[name="year"]'),
+                    startM = startDate.find('[name="month"]'),
+                    endY = endDate.find('[name="year"]'),
+                    endM = endDate.find('[name="month"]'),
+                    minDate = $('[name="minDate"]').val().split('-'),
+                    maxDate = $('[name="maxDate"]').val().split('-');
 
-                            _year = year-1;
-                            _month = month;
 
-                            return _year+'-'+_month;
-                        }
-                    };
                 if (timeType==='month') {
-                    o = {
-                        showDropdowns: true,
-                        autoApply: true,
-                        startDate: calculateStart.month(),
-                        endDate: year+'-'+(month.toString().length===1?'0'+month:month),
-                        locale: {
-                            format: 'YYYY-MM'
-                        }
-                    };
+                    // startY.val(minDate[0]);
+                    // if (minDate[1].includes(0)) {
+                    //     startM.val(minDate[1].slice(1,2));
+                    // }else {
+                    //     startM.val(minDate[1]);
+                    // }
+                    // endY.val(maxDate[0]);
+                    // if (maxDate[1].includes(0)) {
+                    //     endM.val(maxDate[1].slice(1,2));
+                    // }else {
+                    //     endM.val(maxDate[1]);
+                    // }
+                    startM.removeClass('hidden');
+                    endM.removeClass('hidden');
+                    monthLabel.removeClass('hidden');
+
 
                 }else if(timeType==='year') {
-
-                    o = {
-                        showDropdowns: true,
-                        autoApply: true,
-                        startDate: calculateStart.year(),
-                        endDate: year+'',
-                        locale: {
-                            format: 'YYYY'
-                        }
-                    };
+                    // startY.val(minDate[0]);
+                    startM.val(1);
+                    // endY.val(maxDate[0]);
+                    endM.val(12);
+                    startM.addClass('hidden');
+                    endM.addClass('hidden');
+                    monthLabel.addClass('hidden');
                 }
-                return o;
-            },
-            init:function () {
-                var self = this;
-                $(self.target, self.parent).daterangepicker(self.params('month'))
-                    .on('hide.daterangepicker',function () {
-                        self.cb();
-                    });
-                $(self.icon, self.parent).on('click',function () {
-                    $(this).parent().find('input').click();
-                });
-            },
-            cb:function () {
-                myChart.init();
             }
         },
         timeType = {
@@ -563,10 +556,7 @@
                 var self = this;
                 $(self.target, self.parent).on('change.timeType', function () {
                     var val = $(this).val();
-                    $(calendar.target, self.parent).daterangepicker(calendar.params(val))
-                        .on('hide.daterangepicker',function () {
-                            calendar.cb();
-                        });
+                    calendar.init(val);
                     myChart.init();
                 });
             }
@@ -585,7 +575,105 @@
                     myChart.init();
                 })
             }
+        },
+        selectDate = {
+            min: $('[name="minDate"]').val(),
+            max: $('[name="maxDate"]').val(),
+            init: function (year, month) {
+                var elYear = $('[name='+year+']'),
+                    elMonth = $('[name='+month+']'),
+                    startSelect= $('[name="startDate"]'),
+                    endSelect= $('[name="endDate"]'),
+                    startY = startSelect.find('[name="year"]'),
+                    startM = startSelect.find('[name="month"]'),
+                    endY = endSelect.find('[name="year"]'),
+                    endM = endSelect.find('[name="month"]'),
+                    minDate = this.min.split('-'),
+                    maxDate = this.max.split('-'),
+                    minY = parseInt(minDate[0]),
+                    maxY = parseInt(maxDate[0]),
+                    arrY = [],
+                    arrM = [],
+                    optionsY = '',
+                    optionsM = '';
+
+
+
+                for (var i = minY; i <= maxY; i++) {
+                    arrY.push(i);
+                }
+                for (var j = 1; j <= 12; j++) {
+                    arrM.push(j);
+                }
+
+
+                $.each(arrY, function (i, item) {
+                    optionsY += '<option value="'+item+'">' + item + '</option>';
+                });
+                $.each(arrM, function (i, item) {
+                    optionsM += '<option value="'+item+'">' + item + '</option>';
+                });
+
+
+                // 渲染日期下拉菜单
+                elYear.append(optionsY);
+                elMonth.append(optionsM);
+
+
+                // 为日期下拉菜单设定默认值
+                startY.val(minDate[0]);
+                if (minDate[1].includes(0)) {
+                    startM.val(minDate[1].slice(1,2));
+                }else {
+                    startM.val(minDate[1]);
+                }
+                endY.val(maxDate[0]);
+                if (maxDate[1].includes(0)) {
+                    endM.val(maxDate[1].slice(1,2));
+                }else {
+                    endM.val(maxDate[1]);
+                }
+
+            }
+        },
+        formatEndDate= function (year, month) {
+            var y = parseInt(year),
+                m = parseInt(month),
+                d;
+
+
+            switch (m) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    d = 31;
+                    break;
+                case 2:
+                    if (((y%4==0)&&!(y%100==0))||(y%400==0)){
+                        d = 29;
+                    } else{
+                        d = 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    d = 30;
+                    break;
+            }
+
+            if (m.toString().length===1) {
+                m = '0'+m;
+            }
+
+            return y+'-'+m+'-'+d;
         };
+    selectDate.init('year', 'month');
     selectpicker.init();
     calendar.init();
     subDropdownList.init();

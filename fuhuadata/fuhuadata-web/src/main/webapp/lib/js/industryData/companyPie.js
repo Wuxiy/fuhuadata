@@ -15,24 +15,21 @@
             oldData:{},
             getData:function () {
                 var self = this,
+                    startDate = self.child[0],
+                    endDate = self.child[1],
+                    startY = startDate.find('[name="year"]').val(),
+                    startM = startDate.find('[name="month"]').val().length===1?'0'+startDate.find('[name="month"]').val():startDate.find('[name="month"]').val(),
+                    endY = endDate.find('[name="year"]').val(),
+                    endM = endDate.find('[name="month"]').val().length===1?'0'+endDate.find('[name="month"]').val():endDate.find('[name="month"]').val(),
                     data = {
-                        startDate:self.child[0].val(),
-                        endDate:self.child[1].val(),
+                        startDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?startY+'-'+startM+'-01':endY+'-'+endM+'-01',
+                        endDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?formatEndDate(endY, endM):formatEndDate(startY, startM),
                         statType:self.child[2].val(),
                         categoryType:self.child[3].val(),
                         categoryId:self.child[4].val()
                     };
                 self.oldData = $.extend(true, {}, self.data); // 深拷贝
                 self.data = data;
-            },
-            resetChild:function () {
-                var self = this;
-                self.child[0].val(self.oldData.startDate);
-                self.child[1].val(self.oldData.endDate);
-                self.child[2].val(self.oldData.statType);
-                self.child[3].val(self.oldData.categoryType);
-                self.child[4].val(self.oldData.categoryId);
-                self.data = $.extend(true, {}, self.oldData);
             }
         },
         subDropdownList = {
@@ -97,7 +94,7 @@
         },
         otherInput = {
             parent:'#search_data',
-            target:'[name="statType"],[name="startDate"],[name="endDate"]',
+            target:'[name="statType"],[name="year"],[name="month"]',
             init:function () {
                 this.addEvent();
             },
@@ -402,7 +399,12 @@
                         // console.log(o);
                             return o;
                         },self.stateBindColor);
-                        // console.log(self.option);
+
+
+                        // 从大到小排序
+                        self.option.series[0].data.sort(compareNum);
+
+
                         self.insChart.setOption(self.option);
 
                     }else {
@@ -464,7 +466,115 @@
                         .selectpicker('refresh');
                 }
             }
+        },
+        selectDate = {
+            min: $('[name="minDate"]').val(),
+            max: $('[name="maxDate"]').val(),
+            init: function (year, month) {
+                var elYear = $('[name='+year+']'),
+                    elMonth = $('[name='+month+']'),
+                    startSelect= $('[name="startDate"]'),
+                    endSelect= $('[name="endDate"]'),
+                    startY = startSelect.find('[name="year"]'),
+                    startM = startSelect.find('[name="month"]'),
+                    endY = endSelect.find('[name="year"]'),
+                    endM = endSelect.find('[name="month"]'),
+                    minDate = this.min.split('-'),
+                    maxDate = this.max.split('-'),
+                    minY = parseInt(minDate[0]),
+                    maxY = parseInt(maxDate[0]),
+                    arrY = [],
+                    arrM = [],
+                    optionsY = '',
+                    optionsM = '';
+
+
+
+                for (var i = minY; i <= maxY; i++) {
+                    arrY.push(i);
+                }
+                for (var j = 1; j <= 12; j++) {
+                    arrM.push(j);
+                }
+
+
+                $.each(arrY, function (i, item) {
+                    optionsY += '<option value="'+item+'">' + item + '</option>';
+                });
+                $.each(arrM, function (i, item) {
+                    optionsM += '<option value="'+item+'">' + item + '</option>';
+                });
+
+
+                // 渲染日期下拉菜单
+                elYear.append(optionsY);
+                elMonth.append(optionsM);
+
+
+                // 为日期下拉菜单设定默认值
+                startY.val(minDate[0]);
+                if (minDate[1].includes(0)) {
+                    startM.val(minDate[1].slice(1,2));
+                }else {
+                    startM.val(minDate[1]);
+                }
+                endY.val(maxDate[0]);
+                if (maxDate[1].includes(0)) {
+                    endM.val(maxDate[1].slice(1,2));
+                }else {
+                    endM.val(maxDate[1]);
+                }
+
+            }
+        },
+        formatEndDate= function (year, month) {
+            var y = parseInt(year),
+                m = parseInt(month),
+                d;
+
+
+            switch (m) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    d = 31;
+                    break;
+                case 2:
+                    if (((y%4==0)&&!(y%100==0))||(y%400==0)){
+                        d = 29;
+                    } else{
+                        d = 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    d = 30;
+                    break;
+            }
+
+            if (m.toString().length===1) {
+                m = '0'+m;
+            }
+
+            return y+'-'+m+'-'+d;
+        },
+        compareNum = function (a, b) { // 排序规则：从大到小
+            if (a.value < b.value) {
+                return 1;
+            }
+            if (a.value > b.value) {
+                return -1;
+            }
+
+            return 0;
         };
+    selectDate.init('year', 'month');
     subDropdownList.init();
     supDropdownList.init();
     otherInput.init();

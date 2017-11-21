@@ -2,10 +2,12 @@
  * Created by Huxiangyang on 2017/7/5.
  */
 
+
 (function () {
     var form = {
             child:[
-                $('[name="daterange"]','#search_data'),
+                $('[name="startDate"]','#search_data'),
+                $('[name="endDate"]','#search_data'),
                 $('[name="countries"]','#search_data'),
                 $('[name="statType"]','#search_data'),
                 $('[name="categoryType"]','#search_data'),
@@ -14,28 +16,27 @@
             data:{},
             getData:function () {
                 var self = this,
-                    arr = self.child[0].val().split(' - '),
+                    // arr = self.child[0].val().split(' - '),
+                    startDate = self.child[0],
+                    endDate = self.child[1],
+                    startY = startDate.find('[name="year"]').val(),
+                    startM = startDate.find('[name="month"]').val().length===1?'0'+startDate.find('[name="month"]').val():startDate.find('[name="month"]').val(),
+                    endY = endDate.find('[name="year"]').val(),
+                    endM = endDate.find('[name="month"]').val().length===1?'0'+endDate.find('[name="month"]').val():endDate.find('[name="month"]').val(),
                     data = {
                         timeType:'month',
-                        startDate:arr[0],
-                        endDate:arr[1],
-                        statIds:self.child[1].selectpicker('val'),
-                        statType:self.child[2].val(),
-                        categoryType:self.child[3].val(),
-                        categoryId:self.child[4].val()
+                        startDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?formatEndDate(startY, startM):formatEndDate(endY, endM),
+                        endDate:parseInt(startY)<parseInt(endY)||(parseInt(startY)===parseInt(endY)&&parseInt(startM)<=parseInt(endM))?formatEndDate(endY, endM):formatEndDate(startY, startM),
+                        statIds:self.child[2].selectpicker('val'),
+                        statType:self.child[3].val(),
+                        categoryType:self.child[4].val(),
+                        categoryId:self.child[5].val()
                     };
+
 
                 if (Array.isArray(data.statIds)) data.statIds=data.statIds.join(',');
 
-                if (data.startDate.length<5) {
 
-                    data.startDate = data.startDate + '-01-01';
-                    data.endDate = data.endDate + '-01-01';
-                }else {
-
-                    data.startDate = data.startDate + '-01';
-                    data.endDate = data.endDate + '-01';
-                }
                 self.data = data;
             }
         },
@@ -101,7 +102,7 @@
         },
         otherInput = {
             parent:'#search_data',
-            target:'[name="statType"]',
+            target:'[name="statType"],[name="year"],[name="month"]',
             init:function () {
                 this.addEvent();
             },
@@ -359,7 +360,7 @@
                 }
             }
         },
-        calendar={
+        /*calendar={
             parent:'#search_data',
             target:'[name="daterange"]',
             icon:'.icon-calendar',
@@ -420,7 +421,7 @@
             cb:function () {
                 myChart.init();
             }
-        },
+        },*/
         uPriceCheckedBox={
             parent:'#search_data',
             target:'[name="unitPrice"]',
@@ -435,10 +436,107 @@
                     myChart.init();
                 })
             }
-        };
+        },
+        selectDate = {
+            min: $('[name="minDate"]').val(),
+            max: $('[name="maxDate"]').val(),
+            init: function (year, month) {
+                var elYear = $('[name='+year+']'),
+                    elMonth = $('[name='+month+']'),
+                    startSelect= $('[name="startDate"]'),
+                    endSelect= $('[name="endDate"]'),
+                    startY = startSelect.find('[name="year"]'),
+                    startM = startSelect.find('[name="month"]'),
+                    endY = endSelect.find('[name="year"]'),
+                    endM = endSelect.find('[name="month"]'),
+                    minDate = this.min.split('-'),
+                    maxDate = this.max.split('-'),
+                    minY = parseInt(minDate[0]),
+                    maxY = parseInt(maxDate[0]),
+                    arrY = [],
+                    arrM = [],
+                    optionsY = '',
+                    optionsM = '';
 
+
+
+                for (var i = minY; i <= maxY; i++) {
+                    arrY.push(i);
+                }
+                for (var j = 1; j <= 12; j++) {
+                    arrM.push(j);
+                }
+
+
+                $.each(arrY, function (i, item) {
+                    optionsY += '<option value="'+item+'">' + item + '</option>';
+                });
+                $.each(arrM, function (i, item) {
+                    optionsM += '<option value="'+item+'">' + item + '</option>';
+                });
+
+
+                // 渲染日期下拉菜单
+                elYear.append(optionsY);
+                elMonth.append(optionsM);
+
+
+                // 为日期下拉菜单设定默认值
+                startY.val(parseInt(maxDate[0])-1);
+                if (maxDate[1].includes(0)) {
+                    startM.val(maxDate[1].slice(1,2));
+                }else {
+                    startM.val(maxDate[1]);
+                }
+                endY.val(maxDate[0]);
+                if (maxDate[1].includes(0)) {
+                    endM.val(maxDate[1].slice(1,2));
+                }else {
+                    endM.val(maxDate[1]);
+                }
+
+            }
+        },
+        formatEndDate= function (year, month) {
+            var y = parseInt(year),
+                m = parseInt(month),
+                d;
+
+
+            switch (m) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    d = 31;
+                    break;
+                case 2:
+                    if (((y%4==0)&&!(y%100==0))||(y%400==0)){
+                        d = 29;
+                    } else{
+                        d = 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    d = 30;
+                    break;
+            }
+
+            if (m.toString().length===1) {
+                m = '0'+m;
+            }
+
+            return y+'-'+m+'-'+d;
+        };
+    selectDate.init('year', 'month');
     selectpicker.init();
-    calendar.init();
+    // calendar.init();
     subDropdownList.init();
     supDropdownList.init();
     otherInput.init();
