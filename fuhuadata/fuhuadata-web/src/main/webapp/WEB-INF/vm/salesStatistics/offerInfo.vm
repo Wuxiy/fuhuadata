@@ -291,7 +291,6 @@
                                     <label class="checkbox-inline">
                                         <input class="form-control" type="text" id="otherEnterpriseNature" value="" disabled/>
                                     </label>
-
                                 </div>
                             </div>
                         </form>
@@ -304,6 +303,7 @@
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                         <button class="btn btn-primary" id="delete" type="button" disabled>删除</button>
                         <button class="btn btn-xs btn-primary" id="Add" type="button" lang="zh">新增</button>
+                        <button id="copyBOPList" class="btn btn-xs btn-primary" type="button" lang="zh">复制</button>
                     </div>
                     <h3 class="panel-title">
                         产品信息
@@ -329,9 +329,7 @@
                             <th class="text-center" lang="zh">勾选删除项</th>
                         </tr>
                         </thead>
-                        <tbody id="businessproduct">
-
-                        </tbody>
+                        <tbody id="businessproduct"></tbody>
                     </table>
                 </div>
             </div>
@@ -366,6 +364,64 @@
     </div>
 </div>
 
+## 产品信息复制
+<div class="modal fade in" id="modalBPList" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <table class="table table-condensed table-bordered text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center" lang="zh">产品序列号</th>
+                        <th class="text-center" lang="zh">品名</th>
+                        <th class="text-center" lang="zh">品类</th>
+                        <th class="text-center" lang="zh">品牌</th>
+                        <th class="text-center" lang="zh">包装规格</th>
+                        <th class="text-center" lang="zh">产品数量</th>
+                        <th class="text-center" lang="zh">交货时间</th>
+                        <th class="text-center" lang="zh">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in list">
+                        <td>{{ item.productCode }}</td>
+                        <td>{{ item.productName }}</td>
+                        <td>{{ item.categoryName }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.specification }}</td>
+                        <td>{{ item.mainProductAmount }}</td>
+                        <td>{{ item.deliveryTime }}</td>
+                        <td><button class="btn btn-link" type="button" @click="copyItem(item)">复制</button></td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr v-for="(item, index) in cloneList">
+                        <td>{{ item.productCode }}</td>
+                        <td>{{ item.productName }}</td>
+                        <td>{{ item.categoryName }}</td>
+                        <td>{{ item.brand }}</td>
+                        <td>{{ item.specification }}</td>
+                        <td><input class="form-control" type="number" v-model="item.mainProductAmount"></td>
+                        <td><input class="form-control" type="date" v-model="item.deliveryTime"></td>
+                        <td><button class="btn btn-link" type="button" @click="delItem(index)">删除</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="col-lg-2 col-lg-offset-4">
+                    <button class="btn btn-block btn-lg btn-primary" type="button" @click="saveList" :disabled="isNot">保存</button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-block btn-lg btn-default" type="button" @click="cancelSave">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 ## 贸易国别
 <script id="tzC" type="text/html">
@@ -420,26 +476,8 @@
 
     $(document).ready(function(){
 
-        $('#edit').click(function () {
-            if ($('#interestRate').val()==='100') {
-                $('#income').attr('disabled', true);
-            }else {
-                $('#income').attr('disabled', false);
-            }
-        });
-
-        $('#save').click(function () {
-            $('#income').attr('disabled', true);
-        });
-        $('#cancel').click(function () {
-            $('#income').attr('disabled', true);
-        });
-
-        if(orderId!=''&&businessId==''){
-            $('#back').removeClass('hidden');
-            $('#edit').removeClass('hidden');
-            $('#delete').attr('disabled',false);
-
+        // 取得表单数据
+        var getFormData = function () {
             //请求数据
             jQuery.ajax({
                 url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
@@ -525,6 +563,29 @@
                 }
             })
         }
+
+        $('#edit').click(function () {
+            if ($('#interestRate').val()==='100') {
+                $('#income').attr('disabled', true);
+            }else {
+                $('#income').attr('disabled', false);
+            }
+        });
+
+        $('#save').click(function () {
+            $('#income').attr('disabled', true);
+        });
+        $('#cancel').click(function () {
+            $('#income').attr('disabled', true);
+        });
+
+        if(orderId!=''&&businessId==''){
+            $('#back').removeClass('hidden');
+            $('#edit').removeClass('hidden');
+            $('#delete').attr('disabled',false);
+
+            getFormData()
+        }
         if(businessId != ''){
             $('#addback').removeClass('hidden');
             $('#finish').removeClass('hidden');
@@ -576,6 +637,7 @@
                 }
             })
         }
+
 
         // 完成
         $('#finish').click(function(){
@@ -1277,8 +1339,132 @@
 
             return mainForm;
         };
-    })
 
+
+        /**
+         * 产品信息列表项复制功能
+         * 作者：胡向阳
+         *注：以下功能用vue开发
+         */
+
+        $('#copyBOPList').on('click.openModal', function() {
+
+
+            jQuery.ajax({
+                url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
+                type:'GET',
+                success:function(res){
+
+                    businessProductListForCopy.list = res.data.businessOrderProductLists;
+                }
+            });
+
+
+            $('#modalBPList').modal('show');
+        })
+
+        var businessProductListForCopy = new Vue({
+            el: '#modalBPList',
+            data: {
+                list: [],
+                cloneList: [],
+                uploadList: [],
+                isNot: false // 控制提交btn，防止双击
+            },
+            methods: {
+                copyItem: function (item) {
+
+
+                    var oItem = $.extend({}, item);
+
+                    oItem.deliveryTime = oItem.deliveryTime.split(' ')[0];
+                    this.cloneList.push(oItem);
+                },
+                delItem: function (index) {
+
+
+                    this.cloneList.splice(index, 1);
+                },
+                saveList: function () {
+
+
+                    if (this.cloneList.length<1) {
+                        alert('复制至少一项!');
+                        return;
+                    }
+
+
+                    var arr = []
+                        list = this.cloneList,
+                        self = this;
+
+
+                    // 禁用保存按钮
+                    self.isNot = true;
+
+
+                    jQuery.each(list, function(i, item) {
+
+
+                        var obj = {
+                            orderId: orderId,
+                            originalBusinessProductId: item.businessProductId,
+                            mainProductAmount: item.mainProductAmount,
+                            deliveryTime: item.deliveryTime
+                        };
+
+
+                        arr.push(obj);
+                    });
+                    jQuery.ajax({
+                        url:basePath + '/businessProduct/addOrderProductsByCopy',
+                        type:'POST',
+                        contentType:'application/json',
+                        data: JSON.stringify(arr),
+                        success:function(res){
+
+
+                            if (res.code===1) {
+                                // 初始化复制项的值
+                                self.cloneList.length = 0;
+                                self.uploadList.length = 0;
+
+
+                                // 更新视图
+                                getFormData();
+
+
+                                alert('保存成功！');
+
+
+                            }else {
+                                alert('保存失败！');
+                            }
+
+
+                            // 启用保存按钮
+                            self.isNot = false;
+                            $('#modalBPList').modal('hide');
+                        },
+                        error: function(res) {
+
+
+                            // 启用保存按钮
+                            self.isNot = false;
+                            $('#modalBPList').modal('hide');
+                            alert('服务器错误！');
+                        }
+                    });
+                },
+                cancelSave: function () {
+
+
+                    $('#modalBPList').modal('hide');
+                }
+            }
+        });
+
+    })
 
 
 
