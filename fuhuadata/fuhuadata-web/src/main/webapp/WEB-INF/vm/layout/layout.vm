@@ -34,6 +34,7 @@
     <script src="${request.contextPath}/lib/js/select/js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/daterangepicker/moment.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/daterangepicker/daterangepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/vue.js" type="text/javascript" charset="utf-8"></script>
 ##    <script src="${request.contextPath}/lib/js/datetime.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
