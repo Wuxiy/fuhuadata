@@ -5,6 +5,7 @@
     <typeAlias alias="BusinessOrderProduct" type="com.fuhuadata.domain.BusinessOrderProduct"/>
     <typeAlias alias="QueryBusinessOrderProduct" type="com.fuhuadata.domain.query.QueryBusinessOrderProduct"/>
     <typeAlias alias="BusinessOrderProductList" type="com.fuhuadata.vo.BusinessOrderProductList"/>
+    <typeAlias alias="BusinessOrderProductsAddByCopy" type="com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy"/>
 
     <resultMap class="com.fuhuadata.domain.BusinessOrderProduct" id="BusinessOrderProductResultMap">
         <result column="id" jdbcType="INTEGER" property="id" />
@@ -647,5 +648,57 @@
         LEFT JOIN business_product_require bpr on bpr.business_product_id = bop.id
         WHERE bop.order_id = #orderId#
     </select>
+
+    <insert id="addProductByCopy" parameterClass="BusinessOrderProductsAddByCopy">
+        insert into business_order_product(
+        order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,Internal_supply_id,
+        Internal_supply_name,customer_id,name,customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,
+        sub_product_unit,convert_rate,price_type,advise_price,purchase_price,unit_use_rate,capital_interest_price,delivery_time,
+        Internal_transport_mode,Internal_transport_price,factory_id,factory_name,commission_price,documentary_type,documentary_require,
+        other_documentary_require,shipping_agent_require,package_require,goods_type,mianxiangqi,miantuiqi,cupboard_type,cupboard_per_number,cupboard_number,
+        ocean_freight,port_surcharge,tax_type,tax_free,sales_volume,gross_profit,gross_margin,process_cost,other_cost,min_price,contract_price,
+        transform_state,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time
+        )
+        (select order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,Internal_supply_id,
+        Internal_supply_name,customer_id,name,customer_product_name,brand,#mainProductAmount# as main_product_amount,main_product_unit,sub_product_amount,
+        sub_product_unit,convert_rate,price_type,advise_price,purchase_price,unit_use_rate,capital_interest_price,#deliveryTime# as delivery_time,
+        Internal_transport_mode,Internal_transport_price,factory_id,factory_name,commission_price,documentary_type,documentary_require,
+        other_documentary_require,shipping_agent_require,package_require,goods_type,mianxiangqi,miantuiqi,cupboard_type,cupboard_per_number,cupboard_number,
+        ocean_freight,port_surcharge,tax_type,tax_free,sales_volume,gross_profit,gross_margin,process_cost,other_cost,min_price,contract_price,
+        transform_state,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,sysdate() as create_time,sysdate() as modify_time
+        from business_order_product where id=#originalBusinessProductId#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="businessProductId">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <insert id="addProductComponentByCopy" parameterClass="BusinessOrderProductsAddByCopy">
+        insert into business_order_product_component(
+            business_product_id,product_id,ware_id,component_id,consumption,cost,price,remark
+        )
+        (select #businessProductId# as business_product_id,product_id,ware_id,component_id,consumption,cost,price,remark
+        from business_order_product_component where business_product_id=#originalBusinessProductId#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <insert id="addProductRequireByCopy" parameterClass="BusinessOrderProductsAddByCopy">
+        insert into business_product_require(
+        business_product_id,main_packing_id,main_packing_type,specification,size,material,model,
+        price,bottle_weight,bottle_cap_color,bottle_body_color,has_cap_logo,has_body_logo,bottle_diameter,has_danger_sign,business_check_num,
+        has_scale_line,has_spray_code,bottle_paste_require,special_require,addtional_price,outer_packing_id,sealing_style,outer_packing_other_require,
+        auxiliary_material_ids,other_require,other_require_price,other_require_consumption,img_info
+        )
+        (select #businessProductId# as business_product_id,main_packing_id,main_packing_type,specification,size,material,model,
+        price,bottle_weight,bottle_cap_color,bottle_body_color,has_cap_logo,has_body_logo,bottle_diameter,has_danger_sign,business_check_num,
+        has_scale_line,has_spray_code,bottle_paste_require,special_require,addtional_price,outer_packing_id,sealing_style,outer_packing_other_require,
+        auxiliary_material_ids,other_require,other_require_price,other_require_consumption,img_info
+        from business_product_require where business_product_id=#originalBusinessProductId#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
 
 </sqlMap>

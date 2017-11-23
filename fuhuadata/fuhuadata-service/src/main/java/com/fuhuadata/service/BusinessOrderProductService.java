@@ -2,6 +2,7 @@ package com.fuhuadata.service;
 
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
+import com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.BusinessOrderProductVO;
@@ -117,4 +118,6 @@ public interface BusinessOrderProductService {
      * @return
      */
     public Result<BusinessOrderProductVO> getBusinessOrderProducts(String orderId);
+
+    public boolean addProductSByCopy(List<BusinessOrderProductsAddByCopy> list);
 }

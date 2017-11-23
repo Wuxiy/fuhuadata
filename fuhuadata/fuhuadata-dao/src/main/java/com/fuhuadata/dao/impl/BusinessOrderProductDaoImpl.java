@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.BaseDao;
 import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.vo.BusinessOrderProductList;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -41,6 +42,11 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
 
     private static final String GET_ORDER_PRODUCT_LIST="BUSINESSORDERPRODUCT.GET-ORDER-PRODUCT-LIST";
     private static final String IUPDATE_BASIC = "BUSINESSORDERPRODUCT.updateBasic";
+
+    private static final String ADD_PRODUCTS_COPY="BUSINESSORDERPRODUCT.addProductByCopy";
+    private static final String ADD_PRODUCT_COMPONENT="BUSINESSORDERPRODUCT.addProductComponentByCopy";
+    private static final String ADD_PRODUCT_REQUIRE="BUSINESSORDERPRODUCT.addProductRequireByCopy";
+
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
     }
@@ -171,5 +177,21 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
         }
         return false;
     }
+
+    @Override
+    public int addProductsByCopy(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception {
+        return (Integer) sqlMapClient.insert(ADD_PRODUCTS_COPY,businessOrderProductsAddByCopy);
+    }
+
+    @Override
+    public int addProductComponent(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception {
+        return (Integer) sqlMapClient.insert(ADD_PRODUCT_COMPONENT,businessOrderProductsAddByCopy);
+    }
+
+    @Override
+    public int addProductRequire(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception {
+        return (Integer) sqlMapClient.insert(ADD_PRODUCT_REQUIRE,businessOrderProductsAddByCopy);
+    }
+
 
 }

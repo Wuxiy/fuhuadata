@@ -2,10 +2,12 @@ package com.fuhuadata.service.impl;
 
 import com.fuhuadata.dao.*;
 import com.fuhuadata.domain.*;
+import com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductService;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessOrderProductVO;
 import com.fuhuadata.vo.Price.Price;
@@ -591,5 +593,26 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             result.setSuccess(false);
         }
         return result;
+    }
+
+    /**
+     * 复制订单产品及相关产品成分和产品需求
+     * @param list
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addProductSByCopy(List<BusinessOrderProductsAddByCopy> list) {
+        boolean addSuccess=false;
+        try {
+            for (BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy:list){
+                businessOrderProductsAddByCopy.setBusinessProductId(businessOrderProductDao.addProductsByCopy(businessOrderProductsAddByCopy));
+                businessOrderProductDao.addProductComponent(businessOrderProductsAddByCopy);
+                addSuccess= businessOrderProductDao.addProductRequire(businessOrderProductsAddByCopy)>0;
+            }
+        }catch (Exception e){
+            addSuccess=false;
+        }
+        return addSuccess;
     }
 }

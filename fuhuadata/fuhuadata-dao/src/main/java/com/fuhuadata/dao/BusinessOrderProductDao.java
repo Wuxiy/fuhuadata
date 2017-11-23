@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.vo.BusinessOrderProductList;
 
@@ -122,5 +123,15 @@ public interface BusinessOrderProductDao {
 
     public boolean updateBusinessOrderProducts(List<BusinessOrderProduct> businessOrderProducts);
 
+    /**
+     * 复制订单产品表
+     * @param businessOrderProductsAddByCopy
+     * @return
+     * @throws Exception
+     */
+    public int addProductsByCopy(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception;
 
+    public int addProductComponent(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception;
+
+    public int addProductRequire(BusinessOrderProductsAddByCopy businessOrderProductsAddByCopy) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.*;
+import com.fuhuadata.domain.query.BusinessOrderProductsAddByCopy;
 import com.fuhuadata.domain.query.FreightCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -433,5 +435,16 @@ public class BusinessOrderProductAction {
         return result.getResultPojo();
     }
 
+    /**
+     * 通过复制新增订单产品
+     * @return
+     */
+    @RequestMapping(value = "/addOrderProductsByCopy",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo addOrderProductsByCopy(@RequestBody List<BusinessOrderProductsAddByCopy> list){
+        Result result=Result.newResult(false);
+        result.setSuccess(businessOrderProductService.addProductSByCopy(list));
+        return result.getResultPojo();
+    }
 
 }
