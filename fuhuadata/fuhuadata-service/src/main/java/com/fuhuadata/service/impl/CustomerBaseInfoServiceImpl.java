@@ -9,6 +9,7 @@ import java.util.*;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
@@ -53,10 +54,10 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 			//新增潜在客户默认为客户关系,非竞对关系
 			customerBaseInfo.setCompanyType(0);
 			//设置操作人信息，临时处理，登录机制做好后更新此处代码
-			customerBaseInfo.setCreateUserId(1);
-			customerBaseInfo.setCreateUserName("admin");
-			customerBaseInfo.setLastmodifyUserId(1);
-			customerBaseInfo.setLastmodifyUserName("admin");
+			customerBaseInfo.setCreateUserId(LoginUtils.getLoginId());
+			customerBaseInfo.setCreateUserName(LoginUtils.getLoginName());
+			customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+			customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
 			result.addDefaultModel(customerBaseInfoManager.addCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
