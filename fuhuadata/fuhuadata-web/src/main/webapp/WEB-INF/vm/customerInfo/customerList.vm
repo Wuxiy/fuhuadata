@@ -380,7 +380,7 @@
             for(var i=0;i<list.length;i++){
                 var customer = list[i];
                 _html += '<tr>';
-                _html += '<td>'+(++count)+'</td>'
+                _html += '<td>'+customer.customerId+'</td>'
                 _html += '<td>'+customer.ncId+'</td>';
                 _html += '<td><a href="'+basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId='+customer.customerId+'">'+customer.fullName+'</a></td>';
                 _html += '<td>'+(customer.shortName!=undefined?customer.shortName:'')+'</td>';
