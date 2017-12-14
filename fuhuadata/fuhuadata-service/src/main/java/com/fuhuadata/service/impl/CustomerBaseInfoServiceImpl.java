@@ -101,6 +101,8 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	public Result updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
     	Result result = new Result();
     	try{
+    		customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+			customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
     		result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customerId,customerBaseInfo));
     		return result;
 		}catch(Exception e){
