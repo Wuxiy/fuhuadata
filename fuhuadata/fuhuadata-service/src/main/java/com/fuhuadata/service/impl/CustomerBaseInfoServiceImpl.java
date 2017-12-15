@@ -116,6 +116,8 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	public Result updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		Result result = new Result();
 		try {
+            customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+            customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
 			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
