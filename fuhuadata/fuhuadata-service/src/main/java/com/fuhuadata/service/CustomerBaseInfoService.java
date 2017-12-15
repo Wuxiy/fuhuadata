@@ -133,5 +133,7 @@ public interface CustomerBaseInfoService {
 	public Result<List<Timezone>> getTimezone(Timezone timezone);
 
 	public Result<List<CategoryTree>> getCustclass();
+
+	public Result<String> checkCustByName(String custName);
 	
 }

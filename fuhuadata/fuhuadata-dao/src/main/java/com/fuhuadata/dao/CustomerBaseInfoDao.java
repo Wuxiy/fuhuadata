@@ -163,4 +163,11 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
 	public List<CategoryVO> getCustclass();
+
+	/**
+	 * 根据客户名称检查是否存客户（1为存在，空则为不存在）
+	 * @param custName
+	 * @return
+	 */
+	public int checkNewCustName(String custName);
 }

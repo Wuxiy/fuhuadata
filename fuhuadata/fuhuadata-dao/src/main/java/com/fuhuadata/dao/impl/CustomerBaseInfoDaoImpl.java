@@ -45,7 +45,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String GET_TIMEZONE = "CUSTOMERBASEINFO.GET-TIMEZONE";
 
     private static final String GET_ORDER_BY_CUSTOMERID= "CUSTOMERBASEINFO.GET-BY-CUSTOMERID";
-
+    private static final String QUERY_CUSTOMERNAME="CUSTOMERBASEINFO.QUERY-CUST-BY-NAME";
 
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
@@ -174,5 +174,14 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     @Override
     public List<CategoryVO> getCustclass() {
         return this.queryForList(GET_CUSTCLASS);
+    }
+
+    public int checkNewCustName(String custName){
+        Object result=this.queryForObject(QUERY_CUSTOMERNAME,custName);
+        if (result==null){
+            return 0;
+        }else {
+            return 1;
+        }
     }
 }

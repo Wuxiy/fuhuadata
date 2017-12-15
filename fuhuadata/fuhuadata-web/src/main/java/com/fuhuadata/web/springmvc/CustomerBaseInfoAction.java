@@ -399,6 +399,9 @@ public class CustomerBaseInfoAction {
         }
         return result.getResultPojo();
     }
-
-
+    @RequestMapping("/checkCustByName")
+    @ResponseBody
+    public ResultPojo checkNewCustomerName(String custName){
+        return customerBaseInfoService.checkCustByName(custName).getResultPojo();
+    }
 }

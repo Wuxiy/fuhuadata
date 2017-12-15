@@ -9,6 +9,7 @@ import java.util.*;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.SaleCustomerService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CategoryVO;
@@ -360,4 +361,15 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return root_list;
 	}
 
+	public Result<String> checkCustByName(String custName){
+		Result<String> result=new Result<String>();
+		Integer res= customerBaseInfoDao.checkNewCustName(custName);
+		if (res==1){
+			result.setSuccess(false);
+			result.setMessage(custName+"-对应的客户已存在");
+		}else if (res ==0){
+			result.setSuccess(true);
+		}
+		return result;
+	};
 }

@@ -762,4 +762,8 @@
 		from t_formatdoc
 	</select>
 
+	<select id="QUERY-CUST-BY-NAME" parameterClass="java.lang.String" resultClass="int">
+		select 1 from customer_base_info where full_name = #custName# limit 1;
+	</select>
+
 </sqlMap>
