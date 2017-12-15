@@ -615,6 +615,8 @@ CRM.cbInfo.renderAreaTree = function (data) {
  * 以下是实现
  */
 $().ready(function() {
+
+
     var page  = CRM.cbInfo,
         pForm = null,
         mForm = null;
@@ -942,6 +944,35 @@ $().ready(function() {
         var $this = $(this);
         $('#fundType').data('val',$this.data('val'));
         $('#fundType').text($this.data('val'));
+    });
+
+    // 失去焦点时验证客户全称是否有效
+    $('[name="fullName"]').on('blur.verify', function(e) {
+
+        var self = $(this),
+            val = $(this).val();
+        e.preventDefault();
+
+        $.ajax({
+            url: basePath+'/customerBaseInfo/checkCustByName',
+            type: 'GET',
+            data: {
+                custName: val
+            }
+        }).done(function (result) {
+
+
+            if (result.code===0) {
+
+
+                alert(result.message);
+                self.val('');
+
+            }
+
+
+        })
+
     });
 
     /**
