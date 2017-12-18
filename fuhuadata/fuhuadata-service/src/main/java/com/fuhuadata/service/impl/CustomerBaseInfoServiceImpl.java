@@ -104,6 +104,10 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
     	try{
     		customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
 			customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+			log.debug("------------------------------联系人保存BUG日志(service层)--------------------------------");
+			log.debug("修改人为："+LoginUtils.getLoginName());
+			log.debug("customerBaseInfo："+customerBaseInfo.getLastmodifyUserName());
+			log.debug("------------------------------联系人保存BUG日志END-----------------------------");
     		result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customerId,customerBaseInfo));
     		return result;
 		}catch(Exception e){
@@ -118,6 +122,10 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		try {
             customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
             customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+			log.debug("------------------------------联系人保存BUG日志(service层)--------------------------------");
+			log.debug("修改人为："+LoginUtils.getLoginName());
+			log.debug("customerBaseInfo："+customerBaseInfo.getLastmodifyUserName());
+			log.debug("------------------------------联系人保存BUG日志END-----------------------------");
 			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);

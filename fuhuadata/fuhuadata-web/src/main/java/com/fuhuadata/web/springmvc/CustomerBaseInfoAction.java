@@ -207,6 +207,10 @@ public class CustomerBaseInfoAction {
         customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
         customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
         customerBaseInfo.setModifyTime(DateUtil.getDateTime());
+        log.debug("------------------------------联系人保存BUG日志--------------------------------");
+        log.debug("修改时间："+DateUtil.getDateTime()+"，修改人为："+LoginUtils.getLoginName());
+        log.debug("customerBaseInfo："+customerBaseInfo.getLastmodifyUserName());
+        log.debug("------------------------------联系人保存BUG日志END-----------------------------");
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
