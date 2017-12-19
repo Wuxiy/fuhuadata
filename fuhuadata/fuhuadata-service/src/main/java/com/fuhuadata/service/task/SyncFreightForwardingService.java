@@ -144,7 +144,9 @@ public class SyncFreightForwardingService {
                 }
             }
             for (CustomerBaseInfo a:list){
-                customerBaseInfoService.saveOrUpdateSelective(a);
+                if (a.getId()==null){
+                    customerBaseInfoService.save(a);
+                }
             }
             logger.debug("成功同步[{}]条-客户-数据",list.size());
         }catch (Exception e){
