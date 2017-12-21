@@ -211,6 +211,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         }
         return nodes;
     }
+    @Override
+    public List<MixNodeVO> listUserAccountsByRoleIdAndOrgNcid(Integer roleId,String orgId) {
+        List<MixNodeVO> nodes = Lists.newArrayList();
+        List<UserAccount> userAccounts = userRoleService.listUserAccountsByRoleIdAndOrgNcid(roleId,orgId);
+
+        for (UserAccount user : userAccounts) {
+            nodes.add(convertToNode(user));
+        }
+        return nodes;
+    }
 
     @Override
     public List<Integer> listUserIdsByDeptIds(List<String> deptIds) {

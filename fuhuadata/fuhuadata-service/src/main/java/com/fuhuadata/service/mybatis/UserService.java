@@ -60,6 +60,7 @@ public interface UserService extends BaseService<UserAccount, Integer> {
     List<MixNodeVO> getUserTreeByRoleId(Integer roleId);
 
     List<MixNodeVO> listUserNodesByRoleId(Integer roleId);
+    List<MixNodeVO> listUserAccountsByRoleIdAndOrgNcid(Integer roleId,String orgId);
 
     /**
      * 根据部门获取用户

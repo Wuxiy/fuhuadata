@@ -82,6 +82,20 @@
         WHERE ur.role_id=#{roleId}
     </select>
 
+    <select id="listUserAccountsByRoleIdAndOrgNcid" resultMap="com.fuhuadata.dao.mapper.UserAccountMapper.BaseResultMap">
+        SELECT
+        ua.id,
+        ua.name,
+        ua.code,
+        ua.pk_org,
+        ua.pk_psndoc,
+        jo.pk_dept
+        <include refid="FromUserRole"/>
+        <include refid="UserRoleJoinUser"/>
+        <include refid="com.fuhuadata.dao.mapper.UserAccountMapper.JobJoin"/>
+        WHERE ur.role_id=#{roleId} AND jo.pk_dept=#{orgId}
+    </select>
+
     <select id="listRoleIdsByUserCode" resultType="java.lang.Integer">
         SELECT
         ur.role_id

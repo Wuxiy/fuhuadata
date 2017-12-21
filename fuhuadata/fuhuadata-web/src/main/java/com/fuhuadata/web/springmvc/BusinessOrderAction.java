@@ -186,7 +186,7 @@ public class BusinessOrderAction {
         //跟单员不限制组织
         //List<MixNodeVO> merchandiserList =  userService.listUserNodesByDept("1001D210000000004NT0");
         //根据角色list跟单员
-        List<MixNodeVO> merchandiserList =  userService.listUserNodesByRoleId(31);
+        List<MixNodeVO> merchandiserList =  userService.listUserAccountsByRoleIdAndOrgNcid(31,"1001D210000000004NT0");
         return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId)
                 .addObject("businessOrderProduct",result.getModel())
                 .addObject("income",rincome.getModel())

@@ -58,6 +58,14 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
 
         return getUserRoleMapper().listUserAccountsByRoleId(roleId);
     }
+    @Override
+    public List<UserAccount> listUserAccountsByRoleIdAndOrgNcid(Integer roleId,String orgId) {
+        if (roleId == null) {
+            return Collections.emptyList();
+        }
+
+        return getUserRoleMapper().listUserAccountsByRoleIdAndOrgNcid(roleId,orgId);
+    }
 
     @Override
     public Set<Integer> getRoleIds(String userCode) {

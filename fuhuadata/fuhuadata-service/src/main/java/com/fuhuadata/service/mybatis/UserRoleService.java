@@ -40,6 +40,14 @@ public interface UserRoleService extends BaseService<UserRole, Integer> {
     List<UserAccount> listUserAccountByRoleId(Integer roleId);
 
     /**
+     * 获取角色关联的用户，及某组织下
+     * @param roleId
+     * @param orgId
+     * @return
+     */
+    public List<UserAccount> listUserAccountsByRoleIdAndOrgNcid(Integer roleId,String orgId);
+
+    /**
      * 获取用户关联角色id
      * @param userCode
      * @return
