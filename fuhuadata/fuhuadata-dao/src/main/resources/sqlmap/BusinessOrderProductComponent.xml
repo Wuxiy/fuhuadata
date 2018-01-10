@@ -62,7 +62,7 @@
         cc.`component_id` as componentId,
         cc.`component_name` as componentName,
         pc.`consumption`,
-        cc.`unit_cost` as price,
+        pc.price as price,
         pc.cost,
         pc.remark
         FROM
