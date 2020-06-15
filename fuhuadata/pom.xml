@@ -19,7 +19,7 @@
     <properties>
         <fuhuadata-common.version>1.0</fuhuadata-common.version>
         <fuhuadata.version>0.0.1-SNAPSHOT</fuhuadata.version>
-        <spring.version>4.2.9.RELEASE</spring.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <jackson.version>1.5.5</jackson.version>
         <mysql.connector.version>5.1.5</mysql.connector.version>
         <oracle.connector.version>11.2.0.1.0</oracle.connector.version>
